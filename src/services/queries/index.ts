@@ -6,7 +6,6 @@ import {
     getAllExpense,
     getAllField,
     getAllUser,
-    getAllowedUsers,
 } from "services/firebase"
 
 
@@ -30,8 +29,4 @@ export const useGetAllFieldQuery = () => {
 
 export const useGetAllUserQuery = () => {
     return useQuery("getAllUserQuery", () => getAllUser());
-};
-
-export const useGetAllowedUsersQuery = () => {
-    return useQuery("getAllowedUsers", () => getAllowedUsers());
 };

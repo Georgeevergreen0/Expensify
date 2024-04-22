@@ -1,9 +1,6 @@
 {
-  "firestore": {
-    "rules": "firebase.json",
-    "indexes": "firestore.indexes.json"
-  },
   "hosting": {
+    "target": "expensify",
     "public": "build",
     "ignore": [
       "firebase.json",
@@ -16,8 +13,5 @@
         "destination": "/index.html"
       }
     ]
-  },
-  "storage": {
-    "rules": "storage.rules"
   }
 }

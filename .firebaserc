@@ -1,5 +1,15 @@
 {
   "projects": {
-    "default": "arnold-n-associates-inventory"
-  }
+    "default": "evergreenportfolio"
+  },
+  "targets": {
+    "evergreenportfolio": {
+      "hosting": {
+        "expensify": [
+          "expensifyportfolio"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

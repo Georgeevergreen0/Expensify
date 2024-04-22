@@ -3,9 +3,10 @@ import Box from '@mui/material/Box';
 import css from "./login.module.scss";
 import ButtonBase from '@mui/material/ButtonBase';
 import CircularProgress from '@mui/material/CircularProgress';
-import Logo from "assets/logo.png";
+import NoAccountsIcon from '@mui/icons-material/NoAccounts';
+import Logo from "assets/logo.jpg";
 import { toast } from "react-toastify";
-import { signInWithRedirectGoogle, getRedirectResult } from "services/firebase"
+import { signInWithRedirectGoogle, getRedirectResult, signInAnonymously } from "services/firebase"
 // import { Link } from "react-router-dom";
 
 
@@ -33,10 +34,14 @@ function Login() {
 
 
     const handleLoginGoogle = () => {
-        //Web
         setSplashIsOpen(true);
         signInWithRedirectGoogle();
 
+    };
+
+    const handleSignInAnonymously = () => {
+        setSplashIsOpen(true);
+        signInAnonymously();
     };
 
     return (
@@ -44,7 +49,7 @@ function Login() {
             <Box className={css.page}>
                 <Box className={css.content}>
 
-                    <img src={Logo} className={css.logo} alt="Arnold & Associates Ltd" />
+                    <img src={Logo} className={css.logo} alt="Expensify" />
 
                     <Box className={css.headerText}>Hello again!</Box>
 
@@ -59,6 +64,11 @@ function Login() {
                             <path fill="none" d="M0 0h48v48H0z"></path>
                         </svg>
                         <span className="gsi-material-button-contents">Sign in with Google</span>
+                    </ButtonBase>
+
+                    <ButtonBase className={css.button} onClick={handleSignInAnonymously}>
+                        <NoAccountsIcon className={css.icon} />
+                        <span>Sign in Anonymously</span>
                     </ButtonBase>
                 </Box>
             </Box>

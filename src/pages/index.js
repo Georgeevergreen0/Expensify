@@ -15,12 +15,11 @@ import Dashboard from "pages/dashboard/dashboard";
 import Income from "pages/income/income";
 import Expense from "pages/expense/expense";
 import Fields from "pages/fields/fields";
-import Managers from "pages/managers/managers";
 import Settings from "pages/settings/settings";
 import Login from "pages/login/login";
-import { auth, addUser, getUser, updateUser, logout, checkAllowedUsers } from "services/firebase";
+import { auth, addUser, getUser, updateUser } from "services/firebase";
+import Logo from "assets/logo.jpg";
 import { toast } from "react-toastify";
-// import { toast } from "react-toastify";
 
 
 function ScrollToTop() {
@@ -41,36 +40,25 @@ function Pages() {
         auth.onAuthStateChanged(async (user) => {
             try {
                 if (user) {
-                    const userExist = await checkAllowedUsers(user.email);
-                    if (userExist) {
-                        const userData = await getUser(user.uid);
-                        if (userData) {
-                            await updateUser(user.uid, {
-                                lastLoggedIn: user.metadata.lastSignInTime,
-                            });
-                            dispatch(setUser(userData));
-                        } else {
-                            const newUserData = {
-                                uid: user.uid,
-                                photoURL: user.photoURL,
-                                displayName: user.displayName,
-                                email: user.email,
-                                isAdmin: user.email.toLowerCase() === "arnoldebuka214@gmail.com" ? true : false,
-                                created: user.metadata.creationTime,
-                                lastLoggedIn: user.metadata.lastSignInTime,
-                            };
-                            await addUser(user.uid, newUserData);
-                            dispatch(setUser(newUserData));
-                        }
+                    const userData = await getUser(user.uid);
+                    if (userData) {
+                        await updateUser(user.uid, {
+                            lastLoggedIn: user.metadata.lastSignInTime,
+                        });
+                        dispatch(setUser(userData));
                     } else {
-                        dispatch(setUser(null))
-                        localStorage.clear();
-                        logout();
-                        toast.error("You are not allowed to use this application",
-                            {
-                                toastId: "LOGIN"
-                            });
+                        const newUserData = {
+                            uid: user.uid,
+                            photoURL: user.photoURL || Logo,
+                            displayName: user.displayName || "Anonymous",
+                            email: user.email || "Anonymous@email.com",
+                            created: user.metadata.creationTime,
+                            lastLoggedIn: user.metadata.lastSignInTime,
+                        };
+                        await addUser(user.uid, newUserData);
+                        dispatch(setUser(newUserData));
                     }
+
                 } else {
                     dispatch(setUser(null))
                     localStorage.clear();
@@ -93,7 +81,6 @@ function Pages() {
                 <Route exact path="/income" element={user ? <Income /> : <Login />} />
                 <Route exact path="/expenses" element={user ? <Expense /> : <Login />} />
                 <Route exact path="/fields" element={user ? <Fields /> : <Login />} />
-                <Route exact path="/managers" element={user ? <Managers /> : <Login />} />
                 <Route exact path="/settings" element={user ? <Settings /> : <Login />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>

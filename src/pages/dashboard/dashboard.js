@@ -248,7 +248,7 @@ function Home() {
                 )}
             </Box>
 
-            <CSVLink className={css.fab} headers={headers} data={csvData} filename={"Arnold & Associates Ltd.csv"} >
+            <CSVLink className={css.fab} headers={headers} data={csvData} filename={"Expensify.csv"} >
                 <Fab color="primary" component="span">
                     <FileDownloadIcon />
                 </Fab>

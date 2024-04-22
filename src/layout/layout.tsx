@@ -5,7 +5,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import MoneyOffIcon from '@mui/icons-material/MoneyOff';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import SettingsIcon from '@mui/icons-material/Settings';
 import BalconyIcon from '@mui/icons-material/Balcony';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
@@ -15,7 +14,7 @@ import {
     useSelector
 } from "react-redux";
 import { authSelector } from "state/auth";
-import Logo from "assets/logo.png";
+import Logo from "assets/logo.jpg";
 import css from "./layout.module.scss";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -56,7 +55,7 @@ function Layout(props) {
         <React.Fragment>
             <Drawer variant="temporary" anchor="left" open={isOpen} onClose={toggleDrawer} className={css.drawer} classes={{ paper: css.drawer }} closeAfterTransition>
                 <Box className={css.draweImageContainer}>
-                    <img src={Logo} alt="Arnold & Associates Ltd" />
+                    <img src={Logo} alt="Expensify" />
                 </Box>
                 <Divider />
                 <List className={css.list}>
@@ -93,14 +92,6 @@ function Layout(props) {
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding divider>
-                        <ListItemButton selected={location.pathname === "/managers"} onClick={() => navigateTo("/managers")}>
-                            <ListItemIcon>
-                                <ManageAccountsIcon color="primary" />
-                            </ListItemIcon>
-                            <ListItemText primary="Managers" />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding divider>
                         <ListItemButton selected={location.pathname === "/settings"} onClick={() => navigateTo("/settings")}>
                             <ListItemIcon>
                                 <SettingsIcon color="primary" />
@@ -111,15 +102,10 @@ function Layout(props) {
 
                 </List>
 
-
-
                 <Button variant="contained" className={css.logout} color="primary" onClick={handleLogout}>
                     <PowerSettingsNewIcon className={css.logoutIcon} />
                     <Typography variant="button">Log Out</Typography>
                 </Button>
-
-
-
 
             </Drawer>
 

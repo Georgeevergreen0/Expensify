@@ -12,13 +12,13 @@ import "firebase/compat/analytics";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: process.env.apiKey,
-    apiKeyn: process.env.apiKey,
-    projectId: process.env.projectId,
-    storageBucket: process.env.storageBucket,
-    messagingSenderId: process.env.messagingSenderId,
-    appId: process.env.appId,
-    measurementId: process.env.measurementId
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -27,6 +27,10 @@ export const auth = firebase.auth();
 export const db = firebase.firestore();
 export const analytics = firebase.analytics();
 
+
+export const signInAnonymously = async () => {
+    auth.signInAnonymously();
+};
 
 export const signInWithRedirectGoogle = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -106,17 +110,10 @@ export const updateIncome = async (income) => {
 
 export const getAllIncome = async (user) => {
     const transactions = [];
-    if (user.isAdmin) {
-        const querySnapshot = await db.collection("transactions").where("type", "==", "income").get();
-        querySnapshot.forEach((doc) => {
-            transactions.push(doc.data());
-        });
-    } else {
-        const querySnapshot = await db.collection("transactions").where("type", "==", "income").where("authorId", "==", user.uid).get();
-        querySnapshot.forEach((doc) => {
-            transactions.push(doc.data());
-        });
-    }
+    const querySnapshot = await db.collection("transactions").where("type", "==", "income").where("authorId", "==", user.uid).get();
+    querySnapshot.forEach((doc) => {
+        transactions.push(doc.data());
+    });
     const transactionsWithAuthor = await Promise.all(transactions.map(async (transaction) => {
         const author = await getUser(transaction.authorId);
         return ({
@@ -156,17 +153,10 @@ export const updateExpense = async (expense) => {
 
 export const getAllExpense = async (user) => {
     const transactions = [];
-    if (user.isAdmin) {
-        const querySnapshot = await db.collection("transactions").where("type", "==", "expense").get();
-        querySnapshot.forEach((doc) => {
-            transactions.push(doc.data());
-        });
-    } else {
-        const querySnapshot = await db.collection("transactions").where("type", "==", "expense").where("authorId", "==", user.uid).get();
-        querySnapshot.forEach((doc) => {
-            transactions.push(doc.data());
-        });
-    }
+    const querySnapshot = await db.collection("transactions").where("type", "==", "expense").where("authorId", "==", user.uid).get();
+    querySnapshot.forEach((doc) => {
+        transactions.push(doc.data());
+    });
     const transactionsWithAuthor = await Promise.all(transactions.map(async (transaction) => {
         const author = await getUser(transaction.authorId);
         return ({
@@ -243,41 +233,4 @@ export const deleteTransaction = async (transaction) => {
     await ref.delete();
 }
 
-/////////////////////////////allowedUsers//////////////////////////////////////
-export const addAllowedUsers = async (user) => {
-    const userExist = await checkAllowedUsers(user.email);
-    if (userExist) {
-        throw new Error("This email has been added already")
-    }
-    const ref = db.collection("allowed-users").doc();
-    const transaction = {
-        allowedUserId: ref.id,
-        email: user.email.trim().toLowerCase(),
-        created: new Date().toString()
-    };
-    await ref.set(transaction, { merge: true });
-};
-
-export const deleteAllowedUsers = async (user) => {
-    const ref = db.collection("allowed-users").doc(user.allowedUserId);
-    await ref.delete();
-}
-
-export const checkAllowedUsers = async (email) => {
-    const users = [];
-    const querySnapshot = await db.collection("allowed-users").where("email", "==", email.trim().toLowerCase()).get();
-    querySnapshot.forEach((doc) => {
-        users.push(doc.data());
-    });
-    return users[0];
-};
-
-export const getAllowedUsers = async () => {
-    const users = [];
-    const querySnapshot = await db.collection("allowed-users").get();
-    querySnapshot.forEach((doc) => {
-        users.push(doc.data());
-    });
-    return users;
-};
 

@@ -156,7 +156,7 @@ function Home() {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Field Name</TableCell>
-                                    {user.email.toLowerCase() === "arnoldebuka214@gmail.com" && <TableCell sx={{ width: 80 }} align="right">Action</TableCell>}
+                                    <TableCell sx={{ width: 80 }} align="right">Action</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -165,14 +165,11 @@ function Home() {
                                         <TableCell component="th" scope="row">
                                             {field.name}
                                         </TableCell>
-                                        {user.email.toLowerCase() === "arnoldebuka214@gmail.com" && (
-                                            <TableCell align="right">
-                                                <IconButton onClick={(event) => handleOpenMenu(event, field)}>
-                                                    <MoreVertIcon color="primary" />
-                                                </IconButton>
-                                            </TableCell>
-
-                                        )}
+                                        <TableCell align="right">
+                                            <IconButton onClick={(event) => handleOpenMenu(event, field)}>
+                                                <MoreVertIcon color="primary" />
+                                            </IconButton>
+                                        </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -183,11 +180,9 @@ function Home() {
                 )}
             </Box>
 
-            {user.email.toLowerCase() === "arnoldebuka214@gmail.com" && (
-                <Fab color="primary" aria-label="add" className={css.fab} onClick={handleClickAdd}>
-                    <AddIcon />
-                </Fab>
-            )}
+            <Fab color="primary" aria-label="add" className={css.fab} onClick={handleClickAdd}>
+                <AddIcon />
+            </Fab>
 
             <Dialog open={openForm} onClose={handleClose} fullWidth>
                 <DialogTitle>Add Field</DialogTitle>
