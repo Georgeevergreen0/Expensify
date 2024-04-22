@@ -1,0 +1,25 @@
+.fab {
+    position: fixed !important;
+    bottom: 40px;
+    right: 40px;
+}
+
+.transaction {
+    font-weight: bold;
+    margin-bottom: 20px !important;
+}
+
+.sliderContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin-bottom: 30px !important;
+
+    /* Firefox */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+}

@@ -1,0 +1,126 @@
+.headerContainer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+
+
+    .dateTitle {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+        color: #1976d2;
+        margin: 0 auto;
+    }
+
+
+    .buttonLeftYear {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: none;
+        margin-left: 12px;
+        background-color: transparent;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+
+        svg {
+            fill: #1976d2;
+            width: 24px;
+            height: 24px;
+        }
+
+        &:disabled {
+            svg {
+                fill: #BAC2D0;
+            }
+        }
+
+    }
+
+    .buttonLeftMonth {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: none;
+        margin-left: 6px;
+        background-color: transparent;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+
+        svg {
+            fill: #1976d2;
+            width: 24px;
+            height: 24px;
+        }
+
+        &:disabled {
+            svg {
+                fill: #BAC2D0;
+            }
+        }
+
+    }
+
+    .buttonRightMonth {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: none;
+        margin-right: 6px;
+        background-color: transparent;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+
+        svg {
+            fill: #1976d2;
+            width: 24px;
+            height: 24px;
+        }
+
+        &:disabled {
+            svg {
+                fill: #BAC2D0;
+            }
+        }
+
+    }
+
+    .buttonRightYear {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: none;
+        margin-right: 12px;
+        background-color: transparent;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+
+        svg {
+            fill: #1976d2;
+            width: 24px;
+            height: 24px;
+        }
+
+        &:disabled {
+            svg {
+                fill: #BAC2D0;
+            }
+        }
+
+    }
+
+}
+
+.yearCalender {
+    z-index: 5000 !important;
+}
