@@ -31,8 +31,8 @@ const schema = yup.object().shape({
 
 function Home() {
     const { user } = useSelector(authSelector, shallowEqual);
-    const [period, setPeriod] = useState("1month");
-    const [filter, setFilter] = useState(startOfMonth(new Date()));
+    const [period, setPeriod] = useState("all");
+    const [filter, setFilter] = useState(new Date(0));
     const [filterField, setFilterField] = useState("");
 
     const [openForm, setOpenForm] = useState(false);
@@ -189,7 +189,7 @@ function Home() {
                                 <Chip label="All" color="primary" variant={period === "all" ? "filled" : "outlined"} onClick={() => setPeriod("all")} />
                             </Stack>
                             <Box className={css.filter}>
-                                <Typography variant="h6">Filter field</Typography>
+                                <Typography variant="h6">Filter by category</Typography>
                                 <Select
                                     displayEmpty
                                     fullWidth
@@ -217,9 +217,9 @@ function Home() {
                                                 <TableCell sx={{ width: 100 }}> Date</TableCell>
                                                 <TableCell sx={{ width: 100 }}> Author</TableCell>
                                                 <TableCell align="center" sx={{ width: 80 }}> Image</TableCell>
-                                                <TableCell align="right" sx={{ width: 150 }}>Price (Niara)</TableCell>
+                                                <TableCell align="right" sx={{ width: 150 }}>Price (USD)</TableCell>
                                                 <TableCell>Description</TableCell>
-                                                <TableCell>Field</TableCell>
+                                                <TableCell>Category</TableCell>
                                                 <TableCell sx={{ width: 80 }} align="right">Action</TableCell>
                                             </TableRow>
                                         </TableHead>
@@ -231,7 +231,7 @@ function Home() {
                                                     </TableCell>
                                                     <TableCell>{transaction.author.displayName}</TableCell>
                                                     <TableCell align="center"><Avatar src={transaction.author.photoURL} /></TableCell>
-                                                    <TableCell align="right" sx={{ color: "error.main" }}>₦ {numberFormat(transaction.price)}</TableCell>
+                                                    <TableCell align="right" sx={{ color: "error.main" }}>$ {numberFormat(transaction.price)}</TableCell>
                                                     <TableCell>{transaction.description}</TableCell>
                                                     <TableCell>{fieldData.find((field) => field.fieldId === transaction.fieldId)?.name || "None"}</TableCell>
                                                     <TableCell align="right">
@@ -247,7 +247,7 @@ function Home() {
                                                 <TableCell component="th" scope="row">Total</TableCell>
                                                 <TableCell></TableCell>
                                                 <TableCell align="center"></TableCell>
-                                                <TableCell align="right" sx={{ color: "error.main" }}>₦ {numberFormat(pageData.reduce((acc, transaction) => acc + transaction.price, 0))}</TableCell>
+                                                <TableCell align="right" sx={{ color: "error.main" }}>$ {numberFormat(pageData.reduce((acc, transaction) => acc + transaction.price, 0))}</TableCell>
                                                 <TableCell></TableCell>
                                                 <TableCell></TableCell>
                                                 <TableCell align="right"></TableCell>
@@ -291,7 +291,7 @@ function Home() {
                                 {...formik.getFieldProps("price")}
                                 endAdornment={
                                     <Input.EndAdornment>
-                                        NG
+                                        $
                                     </Input.EndAdornment>
                                 }
                             />
@@ -308,7 +308,7 @@ function Home() {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl className={css.select} fullWidth>
-                                <FormLabel>Select associated field for this transaction</FormLabel>
+                                <FormLabel>Select category for this transaction</FormLabel>
                                 <Select
                                     displayEmpty
                                     fullWidth
@@ -346,7 +346,7 @@ function Home() {
                                         <TableCell sx={{ width: 100 }}> Date</TableCell>
                                         <TableCell sx={{ width: 100 }}> Author</TableCell>
                                         <TableCell align="center" sx={{ width: 80 }}> Image</TableCell>
-                                        <TableCell align="right" sx={{ width: 150 }}>Price (Niara)</TableCell>
+                                        <TableCell align="right" sx={{ width: 150 }}>Price (USD)</TableCell>
                                         <TableCell>Description</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -357,7 +357,7 @@ function Home() {
                                         </TableCell>
                                         <TableCell>{activeTransaction.author.displayName}</TableCell>
                                         <TableCell align="center"><Avatar src={activeTransaction.author.photoURL} /></TableCell>
-                                        <TableCell align="right">₦ {numberFormat(activeTransaction.price)}</TableCell>
+                                        <TableCell align="right">$ {numberFormat(activeTransaction.price)}</TableCell>
                                         <TableCell>{activeTransaction.description}</TableCell>
 
                                     </TableRow>

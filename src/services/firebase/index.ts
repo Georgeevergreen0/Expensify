@@ -32,6 +32,15 @@ export const signInAnonymously = async () => {
     auth.signInAnonymously();
 };
 
+
+export const createUserWithEmailAndPassword = async () => {
+    auth.createUserWithEmailAndPassword(process.env.REACT_APP_USERNAME, process.env.REACT_APP_PASSWORD);
+};
+
+export const signInWithEmailAndPassword = async () => {
+    auth.signInWithEmailAndPassword(process.env.REACT_APP_USERNAME, process.env.REACT_APP_PASSWORD);
+};
+
 export const signInWithRedirectGoogle = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.setCustomParameters({

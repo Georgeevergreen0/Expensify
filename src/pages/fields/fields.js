@@ -149,13 +149,13 @@ function Home() {
     return (
         <Layout>
             <Box>
-                <Typography variant="h4" sx={{ mb: "30px" }}>Fields</Typography>
+                <Typography variant="h4" sx={{ mb: "30px" }}>Categories</Typography>
                 {pageData ? (
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 300 }} size="small">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Field Name</TableCell>
+                                    <TableCell>Category Name</TableCell>
                                     <TableCell sx={{ width: 80 }} align="right">Action</TableCell>
                                 </TableRow>
                             </TableHead>

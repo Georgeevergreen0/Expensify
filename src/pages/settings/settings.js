@@ -33,7 +33,6 @@ function Home() {
                 <Typography variant="h3" sx={{ mb: "30px" }}>Settings</Typography>
                 <Box className={css.content}>
                     <Avatar src={user.photoURL} className={css.image} />
-                    <Typography align="center">Admin: {user.isAdmin ? "True" : "False"}</Typography>
                     <Typography align="center" className={css.textName}>{user.displayName}</Typography>
                     <Typography align="center" className={css.textEmail}>{user.email}</Typography>
                 </Box>

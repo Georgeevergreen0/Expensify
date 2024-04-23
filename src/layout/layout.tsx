@@ -88,7 +88,7 @@ function Layout(props) {
                             <ListItemIcon>
                                 <BalconyIcon color="primary" />
                             </ListItemIcon>
-                            <ListItemText primary="Fields" />
+                            <ListItemText primary="Categories" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding divider>

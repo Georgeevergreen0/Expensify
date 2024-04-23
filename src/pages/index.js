@@ -51,7 +51,7 @@ function Pages() {
                             uid: user.uid,
                             photoURL: user.photoURL || Logo,
                             displayName: user.displayName || "Anonymous",
-                            email: user.email || "Anonymous@email.com",
+                            email: user.email || "anonymous@email.com",
                             created: user.metadata.creationTime,
                             lastLoggedIn: user.metadata.lastSignInTime,
                         };

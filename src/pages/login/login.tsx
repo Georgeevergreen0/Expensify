@@ -6,8 +6,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import NoAccountsIcon from '@mui/icons-material/NoAccounts';
 import Logo from "assets/logo.jpg";
 import { toast } from "react-toastify";
-import { signInWithRedirectGoogle, getRedirectResult, signInAnonymously } from "services/firebase"
-// import { Link } from "react-router-dom";
+import { signInWithRedirectGoogle, getRedirectResult, signInWithEmailAndPassword } from "services/firebase"
+
 
 
 
@@ -39,9 +39,9 @@ function Login() {
 
     };
 
-    const handleSignInAnonymously = () => {
+    const handleSignInWithEmailAndPassword = () => {
         setSplashIsOpen(true);
-        signInAnonymously();
+        signInWithEmailAndPassword();
     };
 
     return (
@@ -66,7 +66,7 @@ function Login() {
                         <span className="gsi-material-button-contents">Sign in with Google</span>
                     </ButtonBase>
 
-                    <ButtonBase className={css.button} onClick={handleSignInAnonymously}>
+                    <ButtonBase className={css.button} onClick={handleSignInWithEmailAndPassword}>
                         <NoAccountsIcon className={css.icon} />
                         <span>Sign in Anonymously</span>
                     </ButtonBase>

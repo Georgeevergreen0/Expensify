@@ -34,8 +34,8 @@ const headers = [
 
 function Home() {
     const { user } = useSelector(authSelector, shallowEqual);
-    const [period, setPeriod] = useState("1month");
-    const [filter, setFilter] = useState(startOfMonth(new Date()));
+    const [period, setPeriod] = useState("all");
+    const [filter, setFilter] = useState(new Date(0));
     const [filterField, setFilterField] = useState("");
 
     const { data: fieldData } = useGetAllFieldQuery();
@@ -62,7 +62,7 @@ function Home() {
                     date: format(new Date(transaction?.date), "dd/MM/yyyy"),
                     author: transaction.author.displayName,
                     email: transaction.author.email,
-                    price: `₦ ${numberFormat(transaction.price)}`,
+                    price: `$ ${numberFormat(transaction.price)}`,
                     description: transaction.description,
                     type: transaction.type
                 })
@@ -155,7 +155,7 @@ function Home() {
 
                         </Box>
                         <Box className={css.filter}>
-                            <Typography variant="h6">Filter field</Typography>
+                            <Typography variant="h6">Filter by category</Typography>
                             <Select
                                 displayEmpty
                                 fullWidth
@@ -215,7 +215,7 @@ function Home() {
                                             <Box>
                                                 <Typography variant="h3">Income</Typography>
                                                 <Typography variant="body2">Total transactions: {income.length}</Typography>
-                                                <Typography variant="h6" sx={{ color: "success.main" }}>₦ {numberFormat(incomeTotal)}</Typography>
+                                                <Typography variant="h6" sx={{ color: "success.main" }}>$ {numberFormat(incomeTotal)}</Typography>
                                             </Box>
                                         </Card>
                                     </Grid>
@@ -225,7 +225,7 @@ function Home() {
                                             <Box>
                                                 <Typography variant="h3">Expense</Typography>
                                                 <Typography variant="body2">Total transactions: {expense.length}</Typography>
-                                                <Typography variant="h6" sx={{ color: "error.main" }}>₦ {numberFormat(expenseTotal)}</Typography>
+                                                <Typography variant="h6" sx={{ color: "error.main" }}>$ {numberFormat(expenseTotal)}</Typography>
                                             </Box>
                                         </Card>
                                     </Grid>
@@ -235,7 +235,7 @@ function Home() {
                                             <Box>
                                                 <Typography variant="h3">Net</Typography>
                                                 <Typography variant="body2">Total transactions: {pageData.length}</Typography>
-                                                <Typography variant="h6" sx={{ color: (incomeTotal - expenseTotal) >= 0 ? "success.main" : "error.main" }}>₦ {numberFormat(Math.abs(incomeTotal - expenseTotal))}</Typography>
+                                                <Typography variant="h6" sx={{ color: (incomeTotal - expenseTotal) >= 0 ? "success.main" : "error.main" }}>$ {numberFormat(Math.abs(incomeTotal - expenseTotal))}</Typography>
                                             </Box>
                                         </Card>
                                     </Grid>
